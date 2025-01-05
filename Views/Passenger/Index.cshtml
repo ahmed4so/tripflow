@@ -1,0 +1,47 @@
+﻿@model IEnumerable<UsersApp.Models.Passenger>
+
+@{
+    ViewData["Title"] = "Passengers";
+}
+
+<h2>Passenger List</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Add New Passenger</a>
+
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            int index = 1;
+            foreach (var passenger in Model)
+            {
+                <tr>
+                    <td>@index</td>
+                    <td>@passenger.FullName</td>
+                    <td>@passenger.Email</td>
+                    <td>@passenger.Phone</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@passenger.Id" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@passenger.Id" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                index++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5" class="text-center">No passengers found.</td>
+            </tr>
+        }
+    </tbody>
+</table>
